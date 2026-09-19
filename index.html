@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070a12">
+<meta name="description" content="Engineering Copilot — AI-powered engineering homework helper and calculator.">
+<title>Engineering Copilot</title>
+<style>
+:root{
+  --bg:#060912; --panel:#0c1220; --panel2:#101827; --line:#223049;
+  --text:#f5f7fb; --muted:#8e9bb0; --accent:#65d7ff; --accent2:#8b7cff;
+  --good:#61e6a1; --danger:#ff718b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 20% 0%,#16233d 0,#080c16 38%,#05070d 100%);color:var(--text)}
+body{overflow-x:hidden}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:1180px;margin:auto;padding:24px 18px 50px}
+.bg-grid{position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(101,215,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(101,215,255,.05) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 75%)}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{width:48px;height:48px;border:1px solid #31506d;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#142b40,#0a111d);box-shadow:0 0 28px rgba(101,215,255,.13)}
+.logo svg{width:28px}
+.brand h1{font-size:20px;margin:0;letter-spacing:-.03em}.brand span{font-size:12px;color:var(--muted)}
+.pro{border:1px solid #3e4670;background:linear-gradient(135deg,#17152e,#11162a);color:#c8c3ff;padding:10px 14px;border-radius:999px;font-weight:700}
+.hero{position:relative;border:1px solid var(--line);border-radius:28px;padding:34px;overflow:hidden;background:linear-gradient(135deg,rgba(16,25,42,.94),rgba(8,13,24,.96));box-shadow:0 25px 80px rgba(0,0,0,.35)}
+.hero:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-130px;top:-160px;background:radial-gradient(circle,rgba(101,215,255,.16),transparent 68%);pointer-events:none}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+h2{font-size:clamp(32px,6vw,62px);line-height:.98;letter-spacing:-.055em;max-width:760px;margin:11px 0 15px}
+.hero p{color:var(--muted);max-width:680px;font-size:16px;line-height:1.6;margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.primary,.secondary{border-radius:13px;padding:13px 18px;border:1px solid var(--line);font-weight:800}
+.primary{color:#031018;background:linear-gradient(135deg,#7de1ff,#8eb9ff);border-color:#82dcff;box-shadow:0 8px 30px rgba(101,215,255,.18)}
+.secondary{background:#101a2b;color:var(--text)}
+input[type=file]{display:none}
+.section{margin-top:20px}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:0 0 11px}
+.section-title h3{margin:0;font-size:16px}.section-title span{color:var(--muted);font-size:12px}
+.subjects{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.subject{min-height:82px;text-align:left;border:1px solid var(--line);background:rgba(12,18,32,.84);border-radius:16px;padding:14px;color:var(--text);transition:.2s}
+.subject:hover,.subject.active{transform:translateY(-2px);border-color:#3d7191;background:#101e31}
+.subject .ico{font-size:22px}.subject b{display:block;margin-top:7px;font-size:14px}.subject small{color:var(--muted)}
+.workspace{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+.card{border:1px solid var(--line);border-radius:20px;background:rgba(11,17,29,.88);padding:18px}
+textarea{width:100%;min-height:210px;resize:vertical;border:1px solid #263852;background:#070d18;color:var(--text);border-radius:14px;padding:15px;outline:none;line-height:1.5}
+textarea:focus{border-color:#4c94bb;box-shadow:0 0 0 3px rgba(101,215,255,.08)}
+.toolrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tool{border:1px solid var(--line);background:#0d1625;color:#dbe6f5;padding:9px 11px;border-radius:10px}
+.result{margin-top:13px;border:1px solid #25415a;border-radius:15px;padding:15px;background:#091321;min-height:100px}
+.result h4{margin:0 0 8px}.muted{color:var(--muted)}
+.steps{display:grid;gap:9px}.step{padding:11px;border-left:2px solid var(--accent);background:#0b1624;border-radius:8px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini{border:1px solid var(--line);border-radius:15px;background:#0c1422;padding:14px}.mini b{display:block;margin-bottom:5px}.mini span{color:var(--muted);font-size:12px;line-height:1.45}
+.status{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--good);margin-top:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good)}
+footer{text-align:center;color:#647086;font-size:12px;margin-top:28px}
+@media(max-width:800px){.subjects{grid-template-columns:repeat(2,1fr)}.workspace{grid-template-columns:1fr}.hero{padding:25px 20px}}
+@media(max-width:480px){.app{padding:15px 12px 35px}header{align-items:flex-start}.pro{display:none}.subjects{grid-template-columns:1fr 1fr}.subject{min-height:76px}.tools{grid-template-columns:1fr}h2{font-size:40px}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="logo" aria-label="Engineering Copilot logo">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M6 22.5 12 16l4 4 10-12" stroke="#65d7ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="22.5" r="2" fill="#8b7cff"/><circle cx="26" cy="8" r="2" fill="#65d7ff"/></svg>
+    </div>
+    <div><h1>Engineering Copilot</h1><span>AI • CALCULATE • LEARN • VERIFY</span></div>
+  </div>
+  <button class="pro" id="proBtn">PRO</button>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Your engineering lab</div>
+  <h2>Turn hard problems into understandable steps.</h2>
+  <p>Paste a problem, choose your discipline, and use the workspace to break it into knowns, unknowns, equations, calculations, units, and verification.</p>
+  <div class="actions">
+    <label class="primary" for="fileInput">＋ Scan / Upload Problem</label>
+    <input id="fileInput" type="file" accept="image/*,.pdf,.txt">
+    <button class="secondary" id="focusProblem">Type a Problem →</button>
+  </div>
+  <div class="status"><span class="dot"></span><span id="fileStatus">Ready for your problem</span></div>
+</section>
+
+<section class="section">
+  <div class="section-title"><h3>Choose your engineering discipline</h3><span id="subjectLabel">Electrical selected</span></div>
+  <div class="subjects" id="subjects">
+    <button class="subject active" data-subject="Electrical"><span class="ico">⚡</span><b>Electrical</b><small>Circuits • power • controls</small></button>
+    <button class="subject" data-subject="Mechanical"><span class="ico">⚙️</span><b>Mechanical</b><small>Statics • dynamics • fluids</small></button>
+    <button class="subject" data-subject="Civil"><span class="ico">🏗️</span><b>Civil</b><small>Structures • materials • loads</small></button>
+    <button class="subject" data-subject="Aerospace"><span class="ico">✈️</span><b>Aerospace</b><small>Flight • propulsion • aero</small></button>
+    <button class="subject" data-subject="Chemical"><span class="ico">🧪</span><b>Chemical</b><small>Mass • energy • reactions</small></button>
+    <button class="subject" data-subject="Computer"><span class="ico">💻</span><b>Computer</b><small>Logic • algorithms • systems</small></button>
+    <button class="subject" data-subject="Industrial"><span class="ico">🏭</span><b>Industrial</b><small>Optimization • systems</small></button>
+    <button class="subject" data-subject="Environmental"><span class="ico">🌱</span><b>Environmental</b><small>Water • air • sustainability</small></button>
+  </div>
+</section>
+
+<section class="section workspace">
+  <div class="card">
+    <div class="section-title"><h3>AI Problem Workspace</h3><span id="modeLabel">Step-by-step mode</span></div>
+    <textarea id="problem" placeholder="Example: A 240 V single-phase motor draws 18 A at 0.82 power factor. Calculate real power, apparent power, and reactive power."></textarea>
+    <div class="toolrow">
+      <button class="primary" id="solve">Solve Step-by-Step</button>
+      <button class="tool" id="hint">Give Me a Hint</button>
+      <button class="tool" id="explain">Explain It</button>
+      <button class="tool" id="practice">Make Similar Problem</button>
+    </div>
+    <div class="result" id="result" aria-live="polite">
+      <h4>Waiting for a problem</h4>
+      <div class="muted">Your solution will appear here with equations, substitutions, units, and a verification checklist.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><h3>Engineering Toolbox</h3><span>Quick access</span></div>
+    <div class="tools">
+      <div class="mini"><b>🧮 Equation Solver</b><span>Solve algebraic equations and rearrange formulas.</span></div>
+      <div class="mini"><b>📐 Unit Converter</b><span>SI, US customary, prefixes, and engineering units.</span></div>
+      <div class="mini"><b>📊 Graph Builder</b><span>Plot equations and visualize relationships.</span></div>
+      <div class="mini"><b>✅ Answer Checker</b><span>Check units, signs, magnitude, and assumptions.</span></div>
+      <div class="mini"><b>📚 Formula Library</b><span>Organized equations by engineering discipline.</span></div>
+      <div class="mini"><b>🎓 Tutor Mode</b><span>Hints first, solution when you're ready.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>Engineering Copilot • GitHub Pages ready • Built as a standalone web app</footer>
+</div>
+
+<script>
+(() => {
+  const subjects = document.querySelectorAll(".subject");
+  const label = document.getElementById("subjectLabel");
+  const problem = document.getElementById("problem");
+  const result = document.getElementById("result");
+  const fileInput = document.getElementById("fileInput");
+  const fileStatus = document.getElementById("fileStatus");
+  let subject = "Electrical";
+
+  subjects.forEach(btn => btn.addEventListener("click", () => {
+    subjects.forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    subject = btn.dataset.subject;
+    label.textContent = subject + " selected";
+  }));
+
+  document.getElementById("focusProblem").addEventListener("click", () => {
+    problem.focus();
+    problem.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    fileStatus.textContent = "Loaded: " + file.name + " — connect an AI/OCR backend to analyze the image.";
+  });
+
+  function show(title, html) {
+    result.innerHTML = "<h4>" + title + "</h4>" + html;
+  }
+
+  document.getElementById("solve").addEventListener("click", () => {
+    const text = problem.value.trim();
+    if (!text) {
+      show("Add a problem first", '<div class="muted">Paste your homework question into the workspace. The production version can then send it to an AI solver and specialized engineering calculator.</div>');
+      return;
+    }
+    show(subject + " • Solution Framework", `
+      <div class="steps">
+        <div class="step"><b>1. Parse the problem</b><br><span class="muted">Identify the known values, unknowns, units, constraints, and what the question asks.</span></div>
+        <div class="step"><b>2. Select the governing principles</b><br><span class="muted">Choose equations appropriate to the ${subject.toLowerCase()} problem and state assumptions.</span></div>
+        <div class="step"><b>3. Solve symbolically</b><br><span class="muted">Rearrange equations before substituting numbers when useful.</span></div>
+        <div class="step"><b>4. Substitute with units</b><br><span class="muted">Carry units through the calculation and show intermediate results.</span></div>
+        <div class="step"><b>5. Verify</b><br><span class="muted">Check dimensions, signs, significant figures, and whether the magnitude makes physical sense.</span></div>
+      </div>
+      <p class="muted" style="margin-bottom:0;margin-top:12px">Problem received: “${escapeHtml(text).slice(0,500)}${text.length>500?"…":""}”</p>
+    `);
+  });
+
+  document.getElementById("hint").addEventListener("click", () => {
+    show("Hint", `<div class="muted">Start by writing down every quantity the problem gives you, including its unit. Then identify exactly what quantity the problem asks you to find.</div>`);
+  });
+
+  document.getElementById("explain").addEventListener("click", () => {
+    show("Explain It", `<div class="muted">In Tutor Mode, the app will explain the underlying ${subject.toLowerCase()} concept first, connect each equation to the physical meaning, and then walk through the calculation without skipping steps.</div>`);
+  });
+
+  document.getElementById("practice").addEventListener("click", () => {
+    show("Practice Generator", `<div class="muted">A production AI version will generate a new ${subject.toLowerCase()} problem at the same difficulty, let you solve it, then reveal hints and a worked solution.</div>`);
+  });
+
+  document.getElementById("proBtn").addEventListener("click", () => {
+    show("Engineering Copilot PRO", `<div class="muted">Planned premium features: AI homework solving, image/OCR scanning, advanced calculators, saved projects, personalized practice, engineering reference packs, and verification tools.</div>`);
+  });
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+})();
+</script>
+</body>
+</html>
