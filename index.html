@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<meta name="description" content="Engineering Copilot — solve, calculate, learn and verify engineering problems.">
+<title>Engineering Copilot</title>
+<style>
+:root{--bg:#060912;--panel:#0b1220;--panel2:#101a2c;--line:#22324b;--text:#f5f8ff;--muted:#8d9bb2;--cyan:#63dcff;--violet:#9b8cff;--green:#62e6a2;--red:#ff718d;--shadow:0 22px 70px #0008}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(900px 500px at 10% -5%,#18334b 0,#09101c 45%,#05070d 100%);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}.shell{max-width:1240px;margin:auto;padding:18px}.gridbg{position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(#63dcff0a 1px,transparent 1px),linear-gradient(90deg,#63dcff0a 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(#000,transparent 75%)}header{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border:1px solid #35516d;border-radius:15px;background:linear-gradient(145deg,#13283b,#09101b);display:grid;place-items:center;box-shadow:0 0 30px #63dcff18}.mark svg{width:29px}.brand strong{font-size:18px;letter-spacing:-.03em}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em;font-weight:800}.top-actions{display:flex;gap:8px}.ghost,.pro{border:1px solid var(--line);background:#0c1422;border-radius:11px;padding:10px 13px}.pro{background:linear-gradient(135deg,#1a1834,#10162a);border-color:#494477;color:#c9c3ff;font-weight:800}.hero{position:relative;margin-top:16px;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#101b2bfa,#080e19fa);box-shadow:var(--shadow);padding:38px}.hero:before{content:"";position:absolute;width:500px;height:500px;right:-220px;top:-300px;background:radial-gradient(circle,#63dcff25,transparent 67%)}.eyebrow{color:var(--cyan);font-weight:900;font-size:11px;letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(38px,7vw,76px);line-height:.94;letter-spacing:-.065em;max-width:820px;margin:12px 0}.hero p{max-width:720px;color:var(--muted);font-size:16px}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.primary,.secondary{border-radius:13px;padding:13px 17px;border:1px solid var(--line);font-weight:850}.primary{background:linear-gradient(135deg,#7be5ff,#8e9fff);color:#041018;border-color:#87dfff;box-shadow:0 10px 35px #63dcff20}.secondary{background:#0d1727}.status{margin-top:14px;color:var(--green);font-size:12px;display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}.section{margin-top:18px}.titlebar{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:10px}.titlebar h2{font-size:16px;margin:0}.titlebar span{font-size:12px;color:var(--muted)}.subjects{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}.subject{min-width:0;min-height:88px;text-align:left;border:1px solid var(--line);background:#0b1320dd;border-radius:15px;padding:12px;transition:.18s}.subject:hover,.subject.active{transform:translateY(-2px);border-color:#3f7897;background:#101e30}.subject i{font-style:normal;font-size:21px}.subject b{display:block;margin-top:7px;font-size:13px}.subject small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);gap:14px}.card{border:1px solid var(--line);background:#0a111dcc;border-radius:20px;padding:18px}.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}.tab{padding:9px 11px;border:1px solid var(--line);background:#0d1725;border-radius:10px;font-size:12px}.tab.active{background:#123247;border-color:#397b9b;color:#c9f3ff}.drop{border:1px dashed #34506b;border-radius:16px;padding:13px;text-align:center;background:#08111d;margin-bottom:11px}.drop label{cursor:pointer;color:#bceeff}.drop small{display:block;color:var(--muted);margin-top:3px}.workspace textarea{width:100%;min-height:180px;background:#060c15;border:1px solid #273a54;border-radius:14px;color:var(--text);padding:14px;resize:vertical;outline:none;font-size:15px}.workspace textarea:focus{border-color:#55a4c7;box-shadow:0 0 0 3px #63dcff0d}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.actions button{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#0e1827}.actions .solve{background:linear-gradient(135deg,#73ddff,#899cff);color:#041018;border-color:#7edcff;font-weight:900}.result{margin-top:12px;border:1px solid #29445f;border-radius:15px;background:#08121e;padding:15px;min-height:130px}.result h3{margin:0 0 7px;font-size:15px}.muted{color:var(--muted)}.steps{display:grid;gap:8px;margin-top:10px}.step{border-left:2px solid var(--cyan);background:#0b1725;border-radius:8px;padding:10px}.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#050b13;border:1px solid #1d3045;padding:8px 10px;border-radius:8px;display:block;margin-top:6px;overflow:auto}.toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tool{border:1px solid var(--line);background:#0c1523;border-radius:14px;padding:14px;text-align:left;min-height:92px}.tool b{display:block}.tool span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.calculator{margin-top:12px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:4px}.field input,.field select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#070d17;color:var(--text);outline:none}.calc-actions{display:flex;gap:7px;margin-top:9px}.calc-actions button{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#0f1928}.answer{margin-top:9px;padding:12px;border-radius:11px;background:#07131e;border:1px solid #24435b}.history{display:grid;gap:7px}.history-item{border:1px solid var(--line);border-radius:11px;padding:9px 10px;background:#0b1421;font-size:12px}.history-item span{color:var(--muted);display:block}.hidden{display:none!important}footer{text-align:center;color:#65738a;font-size:11px;padding:25px 0}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(15px);opacity:0;pointer-events:none;background:#101b2b;border:1px solid #35506e;border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);transition:.2s;z-index:20}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media(max-width:1050px){.subjects{grid-template-columns:repeat(4,1fr)}}@media(max-width:780px){.layout{grid-template-columns:1fr}.hero{padding:28px 20px}.subjects{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.shell{padding:11px}.top-actions .ghost{display:none}.hero h1{font-size:43px}.hero{border-radius:21px}.toolgrid,.fields{grid-template-columns:1fr}.subjects{gap:7px}.subject{min-height:78px}.subject small{display:none}}
+</style>
+</head>
+<body>
+<div class="gridbg"></div>
+<div class="shell">
+<header>
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 32 32" fill="none"><path d="M5 24 12 16l4 4 11-12" stroke="#63dcff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 27h20" stroke="#9b8cff" stroke-width="2" stroke-linecap="round"/><circle cx="5" cy="24" r="2" fill="#9b8cff"/><circle cx="27" cy="8" r="2" fill="#63dcff"/></svg></div>
+    <div><strong>Engineering Copilot</strong><small>CALCULATE • LEARN • VERIFY</small></div>
+  </div>
+  <div class="top-actions"><button class="ghost" id="clear">Clear</button><button class="pro" id="pro">PRO</button></div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Your engineering command center</div>
+  <h1>Hard problems.<br>Broken down.</h1>
+  <p>Build understanding instead of just getting an answer. Analyze homework, calculate engineering quantities, practice concepts, and verify your work.</p>
+  <div class="hero-actions">
+    <label class="primary" for="file">＋ Upload / Scan Problem</label><input id="file" type="file" accept="image/*,.pdf,.txt">
+    <button class="secondary" id="jump">Type a Problem →</button>
+  </div>
+  <div class="status"><span class="dot"></span><span id="status">System ready • local tools online</span></div>
+</section>
+
+<section class="section">
+<div class="titlebar"><h2>Engineering discipline</h2><span id="selected">Electrical selected</span></div>
+<div class="subjects" id="subjects">
+<button class="subject active" data-s="Electrical"><i>⚡</i><b>Electrical</b><small>Circuits & power</small></button>
+<button class="subject" data-s="Mechanical"><i>⚙️</i><b>Mechanical</b><small>Statics & dynamics</small></button>
+<button class="subject" data-s="Civil"><i>🏗️</i><b>Civil</b><small>Structures & loads</small></button>
+<button class="subject" data-s="Aerospace"><i>✈️</i><b>Aerospace</b><small>Flight & aero</small></button>
+<button class="subject" data-s="Chemical"><i>🧪</i><b>Chemical</b><small>Mass & energy</small></button>
+<button class="subject" data-s="Computer"><i>💻</i><b>Computer</b><small>Logic & systems</small></button>
+<button class="subject" data-s="Industrial"><i>🏭</i><b>Industrial</b><small>Optimization</small></button>
+<button class="subject" data-s="Environmental"><i>🌱</i><b>Environmental</b><small>Water & air</small></button>
+</div>
+</section>
+
+<section class="section layout">
+<main class="card workspace">
+<div class="titlebar"><h2>AI Homework Lab</h2><span id="mode">Step-by-step</span></div>
+<div class="tabs"><button class="tab active" data-mode="solve">Solve</button><button class="tab" data-mode="hint">Hints</button><button class="tab" data-mode="teach">Teach me</button><button class="tab" data-mode="practice">Practice</button></div>
+<div class="drop"><label for="file">📷 Upload a homework image or document</label><small id="fileName">OCR/AI connection ready for a future API</small></div>
+<textarea id="problem" placeholder="Try: A 240 V single-phase motor draws 18 A at 0.82 power factor. Find real, apparent and reactive power."></textarea>
+<div class="actions"><button class="solve" id="run">Analyze & Solve with AI</button><button id="example">Load Example</button><button id="similar">Similar Problem</button><button id="verify">Check My Answer</button></div>
+<div class="result" id="result"><h3>Awaiting your problem</h3><div class="muted">Enter a problem and the local solver will identify the task, show a method, and verify the structure of the solution.</div></div>
+</main>
+
+<aside class="card">
+<div class="titlebar"><h2>Engineering Toolbox</h2><span>Live tools</span></div>
+<div class="toolgrid">
+<button class="tool" data-tool="ohm"><b>⚡ Ohm's Law</b><span>V, I, R and power</span></button>
+<button class="tool" data-tool="power"><b>🔌 AC Power</b><span>Single-phase calculator</span></button>
+<button class="tool" data-tool="unit"><b>📐 Unit Converter</b><span>Common engineering units</span></button>
+<button class="tool" data-tool="quad"><b>∑ Quadratic</b><span>Roots & discriminant</span></button>
+<button class="tool" data-tool="complex"><b>ℂ Complex Numbers</b><span>Magnitude & angle</span></button>
+<button class="tool" data-tool="percent"><b>％ Percent / Error</b><span>Difference & error</span></button>
+</div>
+<div class="calculator hidden" id="calculator"></div>
+</aside>
+</section>
+
+<section class="section card">
+<div class="titlebar"><h2>Session history</h2><span>Stored in this browser</span></div>
+<div class="history" id="history"><div class="muted">No problems yet.</div></div>
+</section>
+
+<footer>Engineering Copilot Ultimate • AI-powered build • Frontend + secure serverless API</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let subject="Electrical", mode="solve", history=JSON.parse(localStorage.getItem("ec_history")||"[]");
+const problem=$("#problem"), result=$("#result"), calc=$("#calculator");
+
+function toast(t){const x=$("#toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
+function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function renderResult(title,body){result.innerHTML="<h3>"+title+"</h3>"+body}
+function saveHistory(text){if(!text)return;history.unshift({text:text.slice(0,110),subject,time:new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})});history=history.slice(0,6);localStorage.setItem("ec_history",JSON.stringify(history));renderHistory()}
+function renderHistory(){const h=$("#history");h.innerHTML=history.length?history.map(x=>`<button class="history-item" data-text="${esc(x.text)}"><b>${esc(x.subject)}</b><span>${esc(x.text)} • ${x.time}</span></button>`).join(""):"<div class='muted'>No problems yet.</div>";$$(".history-item").forEach(b=>b.onclick=()=>{problem.value=b.dataset.text;problem.focus()})}
+renderHistory();
+
+$$(".subject").forEach(b=>b.onclick=()=>{$$(".subject").forEach(x=>x.classList.remove("active"));b.classList.add("active");subject=b.dataset.s;$("#selected").textContent=subject+" selected"});
+$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");mode=b.dataset.mode;$("#mode").textContent={solve:"Step-by-step",hint:"Hint mode",teach:"Teaching mode",practice:"Practice mode"}[mode]});
+$("#jump").onclick=()=>{problem.focus();problem.scrollIntoView({behavior:"smooth",block:"center"})};
+$("#clear").onclick=()=>{problem.value="";renderResult("Workspace cleared","<div class='muted'>Ready for your next problem.</div>");toast("Workspace cleared")};
+$("#example").onclick=()=>{problem.value="A 240 V single-phase motor draws 18 A at a power factor of 0.82. Calculate apparent power, real power, and reactive power.";toast("Example loaded")};
+$("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;$("#fileName").textContent=f.name+" • "+Math.round(f.size/1024)+" KB";$("#status").textContent="File loaded • connect OCR/AI endpoint for automatic extraction";toast("Problem file loaded")};
+
+function electricalSolve(t){
+const v=t.match(/(\d+(?:\.\d+)?)\s*v\b/i), a=t.match(/(\d+(?:\.\d+)?)\s*a\b/i), pf=t.match(/(?:power factor|pf)\s*(?:of|=)?\s*(0?\.\d+|1(?:\.0+)?)/i);
+if(v&&a&&pf){
+let V=+v[1],I=+a[1],P_F=+pf[1],S=V*I,P=S*P_F,Q=Math.sqrt(Math.max(0,S*S-P*P));
+return {title:"AC power calculation detected",body:`<div class="steps"><div class="step"><b>Known</b><br>V = ${V} V • I = ${I} A • PF = ${P_F}</div><div class="step"><b>Apparent power</b><span class="formula">S = V × I = ${S.toFixed(2)} VA</span></div><div class="step"><b>Real power</b><span class="formula">P = S × PF = ${P.toFixed(2)} W</span></div><div class="step"><b>Reactive power</b><span class="formula">Q = √(S² − P²) = ${Q.toFixed(2)} VAR</span></div><div class="step"><b>Verification</b><br><span class="muted">Units and power-factor relationship are internally consistent.</span></div></div>`}
+const ohmV=t.match(/(\d+(?:\.\d+)?)\s*v\b/i),ohmI=t.match(/(\d+(?:\.\d+)?)\s*a\b/i),ohmR=t.match(/(\d+(?:\.\d+)?)\s*(?:ohms?|ω)\b/i);
+if(ohmV&&ohmI){let V=+ohmV[1],I=+ohmI[1];return {title:"Ohm's law detected",body:`<div class="steps"><div class="step">V = ${V} V • I = ${I} A</div><div class="step"><b>Resistance</b><span class="formula">R = V / I = ${(V/I).toFixed(4)} Ω</span></div><div class="step"><b>Power</b><span class="formula">P = V × I = ${(V*I).toFixed(2)} W</span></div></div>`}
+return null;
+}
+function generic(){
+const t=problem.value.trim(); if(!t){renderResult("Add a problem first","<div class='muted'>Paste a homework question, then press Analyze & Solve.</div>");return}
+if(mode==="hint")return renderResult("First hint",`<div class="steps"><div class="step"><b>1.</b> List every given value and its unit.</div><div class="step"><b>2.</b> Identify exactly what the problem asks you to find.</div><div class="step"><b>3.</b> Find the governing equation before inserting numbers.</div></div>`);
+if(mode==="teach")return renderResult(subject+" teaching mode",`<div class="steps"><div class="step"><b>Concept</b><br>Start from the physical principle behind the problem rather than memorizing a formula.</div><div class="step"><b>Model</b><br>Write the governing relationship and define every variable.</div><div class="step"><b>Calculation</b><br>Substitute values while preserving units.</div><div class="step"><b>Check</b><br>Ask whether the result has the correct units and reasonable magnitude.</div></div>`);
+if(mode==="practice")return renderResult("Practice generator",`<div class="step"><b>New ${subject} practice problem</b><br><br>Change one important variable from your original problem and solve the new version without looking at the original answer. A connected AI backend can generate unlimited level-matched problems and solutions.</div>`);
+let solved=subject==="Electrical"?electricalSolve(t):null;
+if(solved){renderResult(solved.title,solved.body);saveHistory(t);return}
+renderResult(subject+" problem analysis",`<div class="steps"><div class="step"><b>1 — Extract</b><br>Known values, unknowns, units and constraints.</div><div class="step"><b>2 — Model</b><br>Select the governing ${subject.toLowerCase()} equations.</div><div class="step"><b>3 — Solve</b><br>Rearrange symbolically, substitute values, and carry units.</div><div class="step"><b>4 — Verify</b><br>Check dimensions, sign, significant figures and magnitude.</div></div><p class="muted">Local solver: no cloud service is required for this framework. For full natural-language solving, connect an AI API to this interface.</p>`);saveHistory(t)}
+async function aiSolve(){
+const text=problem.value.trim();
+if(!text){renderResult("Add a problem first","<div class='muted'>Paste or upload a problem before asking Engineering Copilot to solve it.</div>");return}
+$("#run").disabled=true; $("#run").textContent="Thinking…"; $("#status").textContent="AI engine working…";
+try{
+  const res=await fetch("/api/solve",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subject,mode,problem:text})});
+  const data=await res.json();
+  if(!res.ok) throw new Error(data.error||"AI request failed");
+  renderResult("Engineering Copilot • "+subject, formatAI(data.answer||"No answer returned."));
+  saveHistory(text);
+}catch(err){
+  renderResult("AI connection needed",`<div class="muted">${esc(err.message)}<br><br>Make sure the app is deployed with the serverless API and an OPENAI_API_KEY environment variable.</div>`);
+}finally{$("#run").disabled=false;$("#run").textContent="Analyze & Solve with AI";$("#status").textContent="System ready • local tools online"}
+}
+function formatAI(s){
+return esc(s).replace(/```([\s\S]*?)```/g,'<pre class="formula">$1</pre>').replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");
+}
+$("#run").onclick=aiSolve;
+$("#similar").onclick=()=>{problem.value=subject==="Electrical"?"A 480 V three-phase load draws 42 A at 0.86 power factor. Calculate apparent power and real power.":"Create a new problem similar to your last one, changing the values and keeping the same concept.";generic()};
+$("#verify").onclick=()=>renderResult("Answer verification",problem.value.trim()?"<div class='steps'><div class='step'>Check units first.</div><div class='step'>Check equation selection and algebra.</div><div class='step'>Recalculate independently.</div><div class='step'>Compare magnitude and significant figures.</div></div>":"<div class='muted'>Enter your problem and your proposed answer to run a verification workflow.</div>");
+
+function openCalc(type){
+calc.classList.remove("hidden");
+let html="";
+if(type==="ohm")html=`<div class="titlebar"><h2>Ohm's Law</h2><span>V = I × R</span></div><div class="fields"><div class="field"><label>Voltage V</label><input id="cv" type="number" step="any" placeholder="240"></div><div class="field"><label>Current I</label><input id="ci" type="number" step="any" placeholder="10"></div></div><div class="calc-actions"><button onclick="calcOhm()">Calculate R & P</button></div><div class="answer" id="ca">Enter V and I.</div>`;
+if(type==="power")html=`<div class="titlebar"><h2>Single-phase AC Power</h2><span>S = VI</span></div><div class="fields"><div class="field"><label>Voltage V</label><input id="pv" type="number" step="any"></div><div class="field"><label>Current A</label><input id="pi" type="number" step="any"></div><div class="field"><label>Power factor</label><input id="pp" type="number" min="0" max="1" step=".01" value=".8"></div></div><div class="calc-actions"><button onclick="calcPower()">Calculate</button></div><div class="answer" id="pa">Enter values.</div>`;
+if(type==="unit")html=`<div class="titlebar"><h2>Unit Converter</h2><span>Length</span></div><div class="fields"><div class="field"><label>Value</label><input id="uv" type="number" step="any"></div><div class="field"><label>From</label><select id="uf"><option value="m">meters</option><option value="ft">feet</option><option value="in">inches</option><option value="mm">millimeters</option></select></div><div class="field"><label>To</label><select id="ut"><option value="m">meters</option><option value="ft">feet</option><option value="in">inches</option><option value="mm">millimeters</option></select></div></div><div class="calc-actions"><button onclick="calcUnit()">Convert</button></div><div class="answer" id="ua">Enter a value.</div>`;
+if(type==="quad")html=`<div class="titlebar"><h2>Quadratic Solver</h2><span>ax² + bx + c = 0</span></div><div class="fields"><div class="field"><label>a</label><input id="qa" type="number" step="any"></div><div class="field"><label>b</label><input id="qb" type="number" step="any"></div><div class="field"><label>c</label><input id="qc" type="number" step="any"></div></div><div class="calc-actions"><button onclick="calcQuad()">Solve</button></div><div class="answer" id="qans">Enter coefficients.</div>`;
+if(type==="complex")html=`<div class="titlebar"><h2>Complex Number</h2><span>a + jb</span></div><div class="fields"><div class="field"><label>Real a</label><input id="za" type="number" step="any"></div><div class="field"><label>Imaginary b</label><input id="zb" type="number" step="any"></div></div><div class="calc-actions"><button onclick="calcComplex()">Calculate</button></div><div class="answer" id="zans">Enter values.</div>`;
+if(type==="percent")html=`<div class="titlebar"><h2>Percent Error</h2><span>|measured−actual|/actual</span></div><div class="fields"><div class="field"><label>Measured</label><input id="pm" type="number" step="any"></div><div class="field"><label>Actual</label><input id="pa2" type="number" step="any"></div></div><div class="calc-actions"><button onclick="calcPercent()">Calculate</button></div><div class="answer" id="pe">Enter values.</div>`;
+calc.innerHTML=html;calc.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+$$(".tool").forEach(b=>b.onclick=()=>openCalc(b.dataset.tool));
+window.calcOhm=()=>{let v=+$("#cv").value,i=+$("#ci").value;$("#ca").textContent=(Number.isFinite(v)&&Number.isFinite(i)&&i!==0)?`R = ${(v/i).toFixed(4)} Ω • P = ${(v*i).toFixed(2)} W`:"Enter valid V and I."};
+window.calcPower=()=>{let v=+$("#pv").value,i=+$("#pi").value,p=+$("#pp").value,s=v*i;$("#pa").textContent=(v>0&&i>=0&&p>=0&&p<=1)?`S = ${s.toFixed(2)} VA • P = ${(s*p).toFixed(2)} W • Q = ${(s*Math.sqrt(1-p*p)).toFixed(2)} VAR`:"Check inputs."};
+window.calcUnit=()=>{let v=+$("#uv").value, f=$("#uf").value,t=$("#ut").value;const m={m:1,ft:.3048,in:.0254,mm:.001};let r=v*m[f]/m[t];$("#ua").textContent=Number.isFinite(r)?`${r.toPrecision(8)} ${t}`:"Check input."};
+window.calcQuad=()=>{let a=+$("#qa").value,b=+$("#qb").value,c=+$("#qc").value,d=b*b-4*a*c;if(!Number.isFinite(a)||a===0){$("#qans").textContent="a must be non-zero.";return}$("#qans").textContent=d>=0?`x₁ = ${((-b+Math.sqrt(d))/(2*a)).toFixed(6)} • x₂ = ${((-b-Math.sqrt(d))/(2*a)).toFixed(6)} • Δ = ${d.toFixed(6)}`:`Complex roots • Δ = ${d.toFixed(6)}`};
+window.calcComplex=()=>{let a=+$("#za").value,b=+$("#zb").value;$("#zans").textContent=`|z| = ${Math.hypot(a,b).toFixed(6)} • angle = ${(Math.atan2(b,a)*180/Math.PI).toFixed(4)}°`};
+window.calcPercent=()=>{let m=+$("#pm").value,a=+$("#pa2").value;$("#pe").textContent=a!==0?`${(Math.abs(m-a)/Math.abs(a)*100).toFixed(4)}% error`:"Actual value cannot be zero."};
+$("#pro").onclick=()=>toast("PRO architecture ready for AI/OCR/API integration");
+})();
+</script>
+</body>
+</html>

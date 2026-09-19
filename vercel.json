@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/solve.js": {
+      "maxDuration": 60
+    }
+  }
+}
